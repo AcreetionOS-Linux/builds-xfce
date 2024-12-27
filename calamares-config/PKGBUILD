@@ -1,6 +1,8 @@
-pkgname=calamares-config
+pkgname=calamares-xfce-config
 _destname1="/etc"
-_destname2="/usr/local/bin"
+_destname2="/usr"
+_destname3=/home/$USER/.local
+_destname4=/home/$USER/.config
 pkgver=3.3.9
 pkgrel=2
 pkgdesc="Calamares Config"
@@ -15,9 +17,13 @@ options=(!strip !emptydirs)
 source=(${pkgname}::"git+${url}/${pkgname}")
 sha256sums=('SKIP')
 package() {
+    # Install /etc
 	install -dm755 ${pkgdir}${_destname1}
-	cp -r ${srcdir}/${pkgname}${_destname1}/* ${pkgdir}${_destname1}
-        install -dm755 ${pkgdir}${_destname2}
-#        cp -r ${srcdir}/${pkgname}${_destname2}/* ${pkgdir}${_destname2}
-#        chmod +x ${pkgdir}${_destname2}/*
+#	cp -r ${srcdir}/${pkgname}${_destname1}/* ${pkgdir}${_destname1}
+    # Install /usr
+    install -dm755 ${pkgdir}${_destname2}
+    # Install /home/$USER/.local
+    install -dm755 ${pkgdir}${_destname3}
+    # Install /home/$USER/.config
+    install -dm755 ${pkgdir}${_destname4}
 }
